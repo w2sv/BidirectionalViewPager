@@ -1,0 +1,60 @@
+plugins {
+    alias libs.plugins.android.library
+    alias libs.plugins.kotlin
+    id 'maven-publish'
+}
+
+android {
+    namespace 'com.w2sv.bidirectionalviewpager'
+    compileSdk libs.versions.compileSdk.get().toInteger()
+    defaultConfig {
+        minSdk libs.versions.minSdk.get().toInteger()
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlin {
+        jvmToolchain(17)
+    }
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+        }
+    }
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'com.github.w2sv'
+                artifactId = 'bidirectionalviewpager'
+                version = '0.0.1'
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation libs.androidx.viewpager2
+    implementation libs.androidx.lifecycle.livedata.core.ktx
+    implementation libs.kotlinutils
+
+    // unitTest
+    testImplementation libs.bundles.unitTest
+    testImplementation libs.androidx.core
+}

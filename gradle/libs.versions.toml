@@ -1,0 +1,25 @@
+[versions]
+kotlin = '1.8.10'
+agp = '7.4.0'
+
+minSdk = '23'
+compileSdk = '33'
+
+lifecycle = '2.6.1'
+
+[libraries]
+androidx-viewpager2 = 'androidx.viewpager2:viewpager2:1.1.0-beta01'
+androidx-lifecycle-livedata-core-ktx = { module = 'androidx.lifecycle:lifecycle-livedata-core-ktx', version.ref = 'lifecycle' }
+kotlinutils = 'com.github.w2sv:KotlinUtils:0.0.6-rc3'
+androidx-core = 'androidx.core:core-ktx:1.9.0'
+
+# unitTest
+junit5 = { module = 'org.junit.jupiter:junit-jupiter', version = '5.9.2' }
+androidx-junit = 'androidx.test.ext:junit:1.1.5'
+
+[bundles]
+unitTest = ["junit5", "androidx-junit"]
+
+[plugins]
+android-library = { id = 'com.android.library', version.ref = 'agp' }
+kotlin = { id = 'org.jetbrains.kotlin.android', version.ref = 'kotlin' }
