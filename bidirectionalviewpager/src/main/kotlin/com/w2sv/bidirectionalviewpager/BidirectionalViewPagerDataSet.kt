@@ -3,7 +3,7 @@ package com.w2sv.bidirectionalviewpager
 import androidx.annotation.VisibleForTesting
 import com.w2sv.bidirectionalviewpager.livedata.MutableListLiveData
 import com.w2sv.bidirectionalviewpager.recyclerview.BidirectionalRecyclerViewAdapter
-import com.w2sv.kotlinutils.extensions.toInt
+import com.w2sv.kotlinutils.asInt
 import java.util.Collections
 
 open class BidirectionalViewPagerDataSet<T>(dataSet: MutableList<T>) :
@@ -62,7 +62,7 @@ open class BidirectionalViewPagerDataSet<T>(dataSet: MutableList<T>) :
 
         Collections.rotate(this, rotationDistance)
         tailPosition = getRotatedIndex(
-            tailPosition - (tailPosition >= removePosition).toInt(),
+            tailPosition - (tailPosition >= removePosition).asInt,
             rotationDistance
         )
     }
